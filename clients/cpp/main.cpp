@@ -1,6 +1,7 @@
 #include "StreamDebug.hpp"
 #include "NoDebug.hpp"
 #include "MyStrategy.hpp"
+#include "NoOpStrategy.hpp"
 #include "TcpStream.hpp"
 #include "model/PlayerMessageGame.hpp"
 #include "model/ServerMessageGame.hpp"
@@ -18,7 +19,8 @@ public:
     outputStream->flush();
   }
   void run() {
-    MyStrategy myStrategy;
+    MyStrategy strategy;
+    // NoOpStrategy strategy;
     StreamDebug debug(outputStream);
     // NoDebug debug;
     while (true) {
@@ -32,7 +34,7 @@ public:
         if (unit.playerId == playerView->myId) {
           actions.emplace(std::make_pair(
               unit.id,
-              myStrategy.getAction(unit, playerView->game, debug)));
+              strategy.getAction(unit, playerView->game, debug)));
         }
       }
       PlayerMessageGame::ActionMessage(Versioned(actions)).writeTo(*outputStream);

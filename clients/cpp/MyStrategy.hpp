@@ -1,16 +1,12 @@
 #ifndef _MY_STRATEGY_HPP_
 #define _MY_STRATEGY_HPP_
 
-#include "Debug.hpp"
-#include "model/CustomData.hpp"
-#include "model/Game.hpp"
-#include "model/Unit.hpp"
-#include "model/UnitAction.hpp"
+#include "Strategy.hpp"
 
-class MyStrategy {
+class MyStrategy: public Strategy {
 public:
   MyStrategy();
-  UnitAction getAction(const Unit &unit, const Game &game, Debug &debug);
+  UnitAction getAction(const Unit &unit, const Game &game, Debug &debug) override;
 };
 
 #endif
