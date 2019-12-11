@@ -21,8 +21,11 @@ public:
   void run() {
     MyStrategy strategy;
     // NoOpStrategy strategy;
+#ifdef NDEBUG
+    NoDebug debug;
+#else
     StreamDebug debug(outputStream);
-    // NoDebug debug;
+#endif
     while (true) {
       auto message = ServerMessageGame::readFrom(*inputStream);
       const auto& playerView = message.playerView;
