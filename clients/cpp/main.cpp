@@ -1,4 +1,5 @@
-#include "Debug.hpp"
+#include "StreamDebug.hpp"
+#include "NoDebug.hpp"
 #include "MyStrategy.hpp"
 #include "TcpStream.hpp"
 #include "model/PlayerMessageGame.hpp"
@@ -18,7 +19,8 @@ public:
   }
   void run() {
     MyStrategy myStrategy;
-    Debug debug(outputStream);
+    StreamDebug debug(outputStream);
+    // NoDebug debug;
     while (true) {
       auto message = ServerMessageGame::readFrom(*inputStream);
       const auto& playerView = message.playerView;
